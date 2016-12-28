@@ -14,8 +14,8 @@ class CircleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        circleLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height)
-        circleLayer.contentsScale = UIScreen.mainScreen().scale
+        circleLayer.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
+        circleLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(circleLayer)
     }
 
