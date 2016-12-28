@@ -15,9 +15,9 @@ class CurveRefreshFooterView: UIView {
     /// 刷新执行的具体操作
     var refreshingBlock: RefreshingBlock?
     
-    private var progress: CGFloat = 0.0 {
+    fileprivate var progress: CGFloat = 0.0 {
         didSet{
-            if !_associatedScrollView.tracking {
+            if !_associatedScrollView.isTracking {
                 labelView.loading = true
             }
             
@@ -29,7 +29,7 @@ class CurveRefreshFooterView: UIView {
             let diff =  _associatedScrollView.contentOffset.y - (_associatedScrollView.contentSize.height - _associatedScrollView.frame.height) - pullDistance + 10.0;
             
             if diff > 0 {
-                if !_associatedScrollView.tracking && !hidden {
+                if !_associatedScrollView.isTracking && !isHidden {
                     if !notTracking {
                         notTracking = true
                         loading = true
@@ -37,7 +37,7 @@ class CurveRefreshFooterView: UIView {
                         
                         //旋转...
                         curveView.startInfiniteRotation()
-                        UIView.animateWithDuration(0.3, animations: { [weak self] () -> Void in
+                        UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
                             if let strongSelf = self {
                                 strongSelf._associatedScrollView.contentInset = UIEdgeInsetsMake(strongSelf.originOffset, 0, strongSelf.pullDistance, 0)
                             }
@@ -51,28 +51,28 @@ class CurveRefreshFooterView: UIView {
                 }
                 
                 if (!loading) {
-                    curveView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) * (diff*2/180))
+                    curveView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI) * (diff*2/180))
                 }
                 
             }else{
                 labelView.loading = false
-                curveView.transform = CGAffineTransformIdentity
+                curveView.transform = CGAffineTransform.identity
             }
         }
         
     }
-    private var _associatedScrollView: UIScrollView!
+    fileprivate var _associatedScrollView: UIScrollView!
     
-    private var labelView: LabelView!
-    private var curveView: CurveView!
-    private var contentSize: CGSize?
-    private var originOffset: CGFloat!
-    private var willEnd: Bool = false
-    private var notTracking: Bool = false
-    private var loading: Bool = false
+    fileprivate var labelView: LabelView!
+    fileprivate var curveView: CurveView!
+    fileprivate var contentSize: CGSize?
+    fileprivate var originOffset: CGFloat!
+    fileprivate var willEnd: Bool = false
+    fileprivate var notTracking: Bool = false
+    fileprivate var loading: Bool = false
     
     init(associatedScrollView: UIScrollView, withNavigationBar: Bool) {
-        super.init(frame: CGRectMake(associatedScrollView.frame.width/2-200/2, associatedScrollView.frame.height, 200, 100))
+        super.init(frame: CGRect(x: associatedScrollView.frame.width/2-200/2, y: associatedScrollView.frame.height, width: 200, height: 100))
         if withNavigationBar {
             originOffset = 64.0
         }else{
@@ -80,10 +80,10 @@ class CurveRefreshFooterView: UIView {
         }
         _associatedScrollView = associatedScrollView
         setUp()
-        _associatedScrollView.addObserver(self, forKeyPath: "contentOffset", options: [.New, .Old], context: nil)
-        _associatedScrollView.addObserver(self, forKeyPath: "contentSize", options: [.New, .Old], context: nil)
-        hidden = true
-        _associatedScrollView.insertSubview(self, atIndex: 0)
+        _associatedScrollView.addObserver(self, forKeyPath: "contentOffset", options: [.new, .old], context: nil)
+        _associatedScrollView.addObserver(self, forKeyPath: "contentSize", options: [.new, .old], context: nil)
+        isHidden = true
+        _associatedScrollView.insertSubview(self, at: 0)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -98,7 +98,7 @@ class CurveRefreshFooterView: UIView {
     func stopRefreshing() {
         willEnd = true
         progress = 1.0
-        UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseInOut, animations: { [weak self] () -> Void in
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: UIViewAnimationOptions(), animations: { [weak self] () -> Void in
             if let strongSelf = self {
                 strongSelf.alpha = 0.0
                 strongSelf._associatedScrollView.contentInset = UIEdgeInsetsMake(strongSelf.originOffset, 0, 0, 0)
@@ -121,12 +121,12 @@ class CurveRefreshFooterView: UIView {
 
 
 extension CurveRefreshFooterView {
-    private func setUp() {
+    fileprivate func setUp() {
         pullDistance = 99;
-        curveView = CurveView(frame: CGRectMake(20, 0, 30, frame.height))
-        insertSubview(curveView, atIndex: 0)
-        labelView = LabelView(frame: CGRectMake(curveView.frame.origin.x + curveView.frame.width + 10.0, curveView.frame.origin.y, 150, curveView.frame.height))
-        labelView.state = .UP
+        curveView = CurveView(frame: CGRect(x: 20, y: 0, width: 30, height: frame.height))
+        insertSubview(curveView, at: 0)
+        labelView = LabelView(frame: CGRect(x: curveView.frame.origin.x + curveView.frame.width + 10.0, y: curveView.frame.origin.y, width: 150, height: curveView.frame.height))
+        labelView.state = .up
         insertSubview(labelView, aboveSubview: curveView)
     }
 }
@@ -134,26 +134,26 @@ extension CurveRefreshFooterView {
 // MARK : KVO
 
 extension CurveRefreshFooterView {
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if keyPath == "contentSize" {
             if let change = change {
-                contentSize = change[NSKeyValueChangeNewKey]?.CGSizeValue()
+                contentSize = (change[NSKeyValueChangeKey.newKey] as AnyObject).cgSizeValue
                 if let contentSize = contentSize {
                     if contentSize.height > 0.0 {
-                        hidden = false
+                        isHidden = false
                     }
-                    frame = CGRectMake(_associatedScrollView.frame.width/2-200/2, contentSize.height, 200, 100);
+                    frame = CGRect(x: _associatedScrollView.frame.width/2-200/2, y: contentSize.height, width: 200, height: 100);
                 }
             }
         }
 
         if keyPath == "contentOffset" {
             if let change = change {
-                let contentOffset = change[NSKeyValueChangeNewKey]?.CGPointValue
+                let contentOffset = (change[NSKeyValueChangeKey.newKey] as AnyObject).cgPointValue
                 if let contentOffset = contentOffset, let contentSize = contentSize {
                     if contentOffset.y >= (contentSize.height - _associatedScrollView.frame.height) {
-                        center = CGPointMake(center.x, contentSize.height + (contentOffset.y - (contentSize.height - _associatedScrollView.frame.height))/2);
+                        center = CGPoint(x: center.x, y: contentSize.height + (contentOffset.y - (contentSize.height - _associatedScrollView.frame.height))/2);
 
                         progress = max(0.0, min((contentOffset.y - (contentSize.height - _associatedScrollView.frame.height)) / pullDistance, 1.0))
 

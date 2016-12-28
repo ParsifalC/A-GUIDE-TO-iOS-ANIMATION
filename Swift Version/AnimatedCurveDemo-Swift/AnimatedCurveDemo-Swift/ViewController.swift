@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "testCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "testCell")
         tableView.layoutIfNeeded()
     }
 
@@ -24,15 +24,15 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let headerView = CurveRefreshHeaderView(associatedScrollView: self.tableView, withNavigationBar: true)
         headerView.triggerPulling()
         headerView.refreshingBlock = { ()->() in
             let delayInSeconds = 2.0
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()){ _ in
+            let delayTime = DispatchTime.now() + Double(Int64(delayInSeconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime){ _ in
                 headerView.stopRefreshing()
             }
         }
@@ -40,8 +40,8 @@ class ViewController: UIViewController {
         let footerView = CurveRefreshFooterView(associatedScrollView: self.tableView, withNavigationBar: true)
         footerView.refreshingBlock = { ()->() in
             let delayInSeconds = 2.0
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delayInSeconds * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()){ _ in
+            let delayTime = DispatchTime.now() + Double(Int64(delayInSeconds * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delayTime){ _ in
                 headerView.stopRefreshing()
             }
         }
@@ -50,12 +50,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let testCell = tableView.dequeueReusableCellWithIdentifier("testCell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let testCell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath)
         testCell.textLabel?.text = "第\(indexPath.row)条"
         return testCell
     }

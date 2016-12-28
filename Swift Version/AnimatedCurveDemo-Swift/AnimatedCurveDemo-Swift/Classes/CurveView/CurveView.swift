@@ -16,7 +16,7 @@ class CurveView: UIView {
         }
     }
 
-    private var curveLayer: CurveLayer!
+    fileprivate var curveLayer: CurveLayer!
     
     override init(frame: CGRect) {
         super.init(frame:frame)
@@ -26,11 +26,11 @@ class CurveView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         curveLayer = CurveLayer()
         curveLayer.frame = bounds
-        curveLayer.contentsScale = UIScreen.mainScreen().scale
+        curveLayer.contentsScale = UIScreen.main.scale
         curveLayer.progress = 0.0
         curveLayer.setNeedsDisplay()
         layer.addSublayer(curveLayer)

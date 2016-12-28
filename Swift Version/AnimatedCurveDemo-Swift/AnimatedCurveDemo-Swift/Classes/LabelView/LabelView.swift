@@ -9,8 +9,8 @@
 import UIKit
 
 enum PULLINGSTATE{
-    case UP
-    case DOWN
+    case up
+    case down
 }
 
 let LabelHeight: CGFloat = 50.0
@@ -21,8 +21,8 @@ class LabelView: UIView {
     let kPullingUpString   = "上拉即可刷新"
     let kReleaseString     = "松开即可刷新..."
     
-    private var kPullingString = ""
-    private var titleLabel: UILabel!
+    fileprivate var kPullingString = ""
+    fileprivate var titleLabel: UILabel!
     
     var loading: Bool = false
     var progress: CGFloat = 0.0 {
@@ -43,9 +43,9 @@ class LabelView: UIView {
             }
         }
     }
-    var state: PULLINGSTATE = .DOWN {
+    var state: PULLINGSTATE = .down {
         didSet{
-            kPullingString = (state == .UP ? kPullingUpString : kPullingDownString)
+            kPullingString = (state == .up ? kPullingUpString : kPullingDownString)
         }
     }
     
@@ -58,11 +58,11 @@ class LabelView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUp() {
-        state = .DOWN
-        titleLabel = UILabel(frame: CGRectMake(0, frame.size.height/2-LabelHeight/2, frame.size.width, LabelHeight))
+    fileprivate func setUp() {
+        state = .down
+        titleLabel = UILabel(frame: CGRect(x: 0, y: frame.size.height/2-LabelHeight/2, width: frame.size.width, height: LabelHeight))
         titleLabel.text = kPullingString
-        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.textColor = UIColor.black
         titleLabel.adjustsFontSizeToFitWidth = true
         addSubview(titleLabel)
     }
