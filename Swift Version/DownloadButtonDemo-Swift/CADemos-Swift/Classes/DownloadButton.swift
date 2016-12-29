@@ -14,12 +14,12 @@ let kRadiusExpandAnim = "radiusExpandAnimation"
 let kProgressBarAnimation = "progressBarAnimation"
 let kCheckAnimation = "checkAnimation"
 
-class DownloadButton: UIView {
+class DownloadButton: UIView, CAAnimationDelegate {
 
     var progressBarHeight: CGFloat = 0.0
     var progressBarWidth: CGFloat = 0.0
-    private var originframe: CGRect = CGRectZero
-    private var animating: Bool = false
+    fileprivate var originframe: CGRect = CGRect.zero;
+    fileprivate var animating: Bool = false;
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,12 +31,12 @@ class DownloadButton: UIView {
         setUpViews()
     }
     
-    private func setUpViews(){
-        let tapGes = UITapGestureRecognizer(target: self, action: "handleButtonDidTapped:")
+    fileprivate func setUpViews(){
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(DownloadButton.handleButtonDidTapped(_:)))
         addGestureRecognizer(tapGes)
     }
     
-    @objc private func handleButtonDidTapped(gesture: UITapGestureRecognizer){
+    @objc fileprivate func handleButtonDidTapped(_ gesture: UITapGestureRecognizer){
         if animating {
             return
         }
@@ -54,17 +54,17 @@ class DownloadButton: UIView {
         radiusShrinkAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         radiusShrinkAnimation.fromValue = originframe.height / 2
         radiusShrinkAnimation.delegate = self
-        layer.addAnimation(radiusShrinkAnimation, forKey: kRadiusShrinkAnim)
+        layer.add(radiusShrinkAnimation, forKey: kRadiusShrinkAnim)
     }
     
-    private func progressBarAnimation() {
+    fileprivate func progressBarAnimation() {
         let progressLayer = CAShapeLayer()
         let path = UIBezierPath()
-        path.moveToPoint(CGPoint(x: progressBarHeight / 2, y: self.frame.height / 2))
-        path.addLineToPoint(CGPointMake(bounds.size.width - progressBarHeight / 2, bounds.size.height / 2))
+        path.move(to: CGPoint(x: progressBarHeight / 2, y: self.frame.height / 2))
+        path.addLine(to: CGPoint(x: bounds.size.width - progressBarHeight / 2, y: bounds.size.height / 2))
         
-        progressLayer.path = path.CGPath
-        progressLayer.strokeColor = UIColor.whiteColor().CGColor
+        progressLayer.path = path.cgPath
+        progressLayer.strokeColor = UIColor.white.cgColor
         progressLayer.lineWidth = progressBarHeight - 6
         progressLayer.lineCap = kCALineCapRound
         layer.addSublayer(progressLayer)
@@ -75,20 +75,20 @@ class DownloadButton: UIView {
         pathAnimation.toValue = 1.0
         pathAnimation.delegate = self
         pathAnimation.setValue(kProgressBarAnimation, forKey: "animationName")
-        progressLayer.addAnimation(pathAnimation, forKey: nil)
+        progressLayer.add(pathAnimation, forKey: nil)
     }
     
-    private func checkAnimation() {
+    fileprivate func checkAnimation() {
         let checkLayer = CAShapeLayer()
         let path = UIBezierPath()
-        let rectInCircle = CGRectInset(self.bounds, self.bounds.size.width*(1-1/sqrt(2.0))/2, self.bounds.size.width*(1-1/sqrt(2.0))/2)
-        path.moveToPoint(CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width/9, y: rectInCircle.origin.y + rectInCircle.size.height*2/3))
-        path.addLineToPoint(CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width/3,y: rectInCircle.origin.y + rectInCircle.size.height*9/10))
-        path.addLineToPoint(CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width*8/10, y: rectInCircle.origin.y + rectInCircle.size.height*2/10))
+        let rectInCircle = self.bounds.insetBy(dx: self.bounds.size.width*(1-1/sqrt(2.0))/2, dy: self.bounds.size.width*(1-1/sqrt(2.0))/2)
+        path.move(to: CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width/9, y: rectInCircle.origin.y + rectInCircle.size.height*2/3))
+        path.addLine(to: CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width/3,y: rectInCircle.origin.y + rectInCircle.size.height*9/10))
+        path.addLine(to: CGPoint(x: rectInCircle.origin.x + rectInCircle.size.width*8/10, y: rectInCircle.origin.y + rectInCircle.size.height*2/10))
         
-        checkLayer.path = path.CGPath
-        checkLayer.fillColor = UIColor.clearColor().CGColor
-        checkLayer.strokeColor = UIColor.whiteColor().CGColor
+        checkLayer.path = path.cgPath
+        checkLayer.fillColor = UIColor.clear.cgColor
+        checkLayer.strokeColor = UIColor.white.cgColor
         checkLayer.lineWidth = 10.0
         checkLayer.lineCap = kCALineCapRound
         checkLayer.lineJoin = kCALineJoinRound
@@ -100,7 +100,7 @@ class DownloadButton: UIView {
         checkAnimation.toValue = 1.0
         checkAnimation.delegate = self
         checkAnimation.setValue(kCheckAnimation, forKey:"animationName")
-        checkLayer.addAnimation(checkAnimation,forKey:nil)
+        checkLayer.add(checkAnimation,forKey:nil)
     }
 }
 
@@ -108,16 +108,16 @@ extension DownloadButton {
     
     // MARK : CAAnimationDelegate
     
-    override func animationDidStart(anim: CAAnimation) {
-        if anim.isEqual(self.layer.animationForKey(kRadiusShrinkAnim)) {
-            UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+    func animationDidStart(_ anim: CAAnimation) {
+        if anim.isEqual(self.layer.animation(forKey: kRadiusShrinkAnim)) {
+            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
                 self.bounds = CGRect(x: 0, y: 0, width: self.progressBarWidth, height: self.progressBarHeight)
                 }, completion: { (finished) -> Void in
                     self.layer.removeAllAnimations()
                     self.progressBarAnimation()
             })
-        }else if anim.isEqual(self.layer.animationForKey(kRadiusExpandAnim)){
-            UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+        }else if anim.isEqual(self.layer.animation(forKey: kRadiusExpandAnim)){
+            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: { () -> Void in
                 self.bounds = CGRect(x: 0, y: 0, width: self.originframe.width, height: self.originframe.height)
                 self.backgroundColor = UIColor(red: 0.1803921568627451, green: 0.8, blue: 0.44313725490196076, alpha: 1.0)
                 }, completion: { (finished) -> Void in
@@ -129,10 +129,10 @@ extension DownloadButton {
         
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if let animationName = anim.valueForKey("animationName") where
-            animationName.isEqualToString(kProgressBarAnimation) {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if let animationName = anim.value(forKey: "animationName"),
+            (animationName as AnyObject).isEqual(to: kProgressBarAnimation) {
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     if let sublayers = self.layer.sublayers{
                         for subLayer in sublayers {
                             subLayer.opacity = 0.0
@@ -150,7 +150,7 @@ extension DownloadButton {
                         radiusExpandAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
                         radiusExpandAnimation.fromValue = self.progressBarHeight / 2
                         radiusExpandAnimation.delegate = self
-                        self.layer.addAnimation(radiusExpandAnimation, forKey: kRadiusExpandAnim)
+                        self.layer.add(radiusExpandAnimation, forKey: kRadiusExpandAnim)
                 })
         }
     }
