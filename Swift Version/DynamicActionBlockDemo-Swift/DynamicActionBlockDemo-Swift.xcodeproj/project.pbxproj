@@ -14,7 +14,7 @@
 		5F3130931C377DAD006EF060 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3130911C377DAD006EF060 /* LaunchScreen.storyboard */; };
 		5F31309E1C377DAD006EF060 /* DynamicActionBlockDemo_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F31309D1C377DAD006EF060 /* DynamicActionBlockDemo_SwiftTests.swift */; };
 		5F3130A91C377DAD006EF060 /* DynamicActionBlockDemo_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130A81C377DAD006EF060 /* DynamicActionBlockDemo_SwiftUITests.swift */; };
-		5F3130BB1C37A186006EF060 /* DynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130BA1C37A186006EF060 /* DynamicView.swift */; settings = {ASSET_TAGS = (); }; };
+		5F3130BB1C37A186006EF060 /* DynamicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130BA1C37A186006EF060 /* DynamicView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,18 +190,21 @@
 		5F31307D1C377DAC006EF060 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kitten Yang";
 				TargetAttributes = {
 					5F3130841C377DAD006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					5F3130981C377DAD006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5F3130841C377DAD006EF060;
 					};
 					5F3130A31C377DAD006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5F3130841C377DAD006EF060;
 					};
 				};
@@ -328,8 +331,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -373,8 +378,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -393,6 +400,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -406,6 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -417,6 +426,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -428,6 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DynamicActionBlockDemo-Swift.app/DynamicActionBlockDemo-Swift";
 			};
 			name = Debug;
@@ -440,6 +451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DynamicActionBlockDemo-Swift.app/DynamicActionBlockDemo-Swift";
 			};
 			name = Release;
@@ -451,6 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "DynamicActionBlockDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -463,6 +476,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DynamicActionBlockDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "DynamicActionBlockDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -487,6 +501,7 @@
 				5F3130AF1C377DAD006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F3130B01C377DAD006EF060 /* Build configuration list for PBXNativeTarget "DynamicActionBlockDemo-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +510,7 @@
 				5F3130B21C377DAD006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F3130B31C377DAD006EF060 /* Build configuration list for PBXNativeTarget "DynamicActionBlockDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +519,7 @@
 				5F3130B51C377DAD006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

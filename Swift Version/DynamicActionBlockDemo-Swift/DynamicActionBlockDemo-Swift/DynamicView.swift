@@ -10,15 +10,15 @@ import UIKit
 
 class DynamicView: UIView {
     
-    private var panView: UIView?
-    private var ballImageView: UIImageView?
-    private var topView: UIView?
-    private var middleView: UIView?
-    private var bottomView: UIView?
-    private var animator: UIDynamicAnimator?
-    private var panGravity: UIGravityBehavior?
-    private var viewsGravity: UIGravityBehavior?
-    private var shapeLayer: CAShapeLayer?
+    fileprivate var panView: UIView?
+    fileprivate var ballImageView: UIImageView?
+    fileprivate var topView: UIView?
+    fileprivate var middleView: UIView?
+    fileprivate var bottomView: UIView?
+    fileprivate var animator: UIDynamicAnimator?
+    fileprivate var panGravity: UIGravityBehavior?
+    fileprivate var viewsGravity: UIGravityBehavior?
+    fileprivate var shapeLayer: CAShapeLayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +29,7 @@ class DynamicView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUpViews(){
+    fileprivate func setUpViews(){
         panView = UIView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height/2))
         panView?.alpha = 0.5
         addSubview(panView!)
@@ -37,16 +37,16 @@ class DynamicView: UIView {
         panView?.layer.shadowOffset = CGSize(width: -1, height: 2)
         panView?.layer.shadowOpacity = 0.5
         panView?.layer.shadowRadius = 5.0
-        panView?.layer.shadowColor = UIColor.blackColor().CGColor
+        panView?.layer.shadowColor = UIColor.black.cgColor
         panView?.layer.masksToBounds = false
-        panView?.layer.shadowPath = UIBezierPath(rect: (panView?.bounds)!).CGPath
+        panView?.layer.shadowPath = UIBezierPath(rect: (panView?.bounds)!).cgPath
         
-        let pan = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(DynamicView.handlePanGesture(_:)))
         panView?.addGestureRecognizer(pan)
         
         let grd = CAGradientLayer()
         grd.frame = (panView?.frame)!
-        grd.colors = [UIColor(red: 0.0, green: 191/255.0, blue: 255/255.0, alpha: 1.0).CGColor,UIColor.whiteColor().CGColor]
+        grd.colors = [UIColor(red: 0.0, green: 191/255.0, blue: 255/255.0, alpha: 1.0).cgColor,UIColor.white.cgColor]
         panView?.layer.addSublayer(grd)
         
         ballImageView = UIImageView(frame: CGRect(x: bounds.width/2 - 30, y: bounds.height/1.5, width: 60, height: 60))
@@ -55,31 +55,31 @@ class DynamicView: UIView {
         ballImageView?.layer.shadowOffset = CGSize(width: -4, height: 4)
         ballImageView?.layer.shadowOpacity = 0.5
         ballImageView?.layer.shadowRadius = 5.0
-        ballImageView?.layer.shadowColor = UIColor.blackColor().CGColor
+        ballImageView?.layer.shadowColor = UIColor.black.cgColor
         ballImageView?.layer.masksToBounds = false
         
         // middleView
         middleView = UIView(frame: CGRect(x: (ballImageView?.center.x)!-15, y: 200, width: 30, height: 30))
-        middleView?.backgroundColor = UIColor.grayColor()
+        middleView?.backgroundColor = UIColor.gray
         addSubview(middleView!)
         middleView?.center = CGPoint(x: (middleView?.center.x)!, y: (ballImageView?.center.y)! - (panView?.center.y)! + 15)
 
         // topView
         topView = UIView(frame: CGRect(x: (ballImageView?.center.x)! - 15, y: 200, width: 30, height: 30))
-        topView?.backgroundColor = UIColor.grayColor()
+        topView?.backgroundColor = UIColor.gray
         addSubview(topView!)
         topView?.center = CGPoint(x: (topView?.center.x)!, y: (middleView?.center.y)! - (panView?.center.y)! + (panView?.center.y)!/2)
         
         // bottomView
         bottomView = UIView(frame: CGRect(x: (ballImageView?.center.x)! - 15, y: 200, width: 30, height: 30))
-        bottomView?.backgroundColor = UIColor.grayColor()
+        bottomView?.backgroundColor = UIColor.gray
         addSubview(bottomView!)
         bottomView?.center = CGPoint(x: (bottomView?.center.x)!, y: (middleView?.center.y)! - (panView?.center.y)! + (panView?.center.y)! * 1.5)
 
         setUpBehaviors()
     }
     
-    private func setUpBehaviors(){
+    fileprivate func setUpBehaviors(){
         animator = UIDynamicAnimator(referenceView: self)
         panGravity = UIGravityBehavior(items: [panView!])
         animator?.addBehavior(panGravity!)
@@ -91,43 +91,43 @@ class DynamicView: UIView {
             print("Acton!")
             if let strongSelf = self{
                 let path = UIBezierPath()
-                path.moveToPoint((strongSelf.panView?.center)!)
-                path.addCurveToPoint((strongSelf.ballImageView?.center)!, controlPoint1: (strongSelf.topView?.center)!, controlPoint2: (strongSelf.bottomView?.center)!)
+                path.move(to: (strongSelf.panView?.center)!)
+                path.addCurve(to: (strongSelf.ballImageView?.center)!, controlPoint1: (strongSelf.topView?.center)!, controlPoint2: (strongSelf.bottomView?.center)!)
                 
                 if strongSelf.shapeLayer == nil{
                     strongSelf.shapeLayer = CAShapeLayer()
-                    strongSelf.shapeLayer?.fillColor = UIColor.clearColor().CGColor
-                    strongSelf.shapeLayer?.strokeColor = UIColor(red: 224.0/255.0, green: 0.0, blue: 35.0/255.0, alpha: 1.0).CGColor
+                    strongSelf.shapeLayer?.fillColor = UIColor.clear.cgColor
+                    strongSelf.shapeLayer?.strokeColor = UIColor(red: 224.0/255.0, green: 0.0, blue: 35.0/255.0, alpha: 1.0).cgColor
                     strongSelf.shapeLayer?.lineWidth = 5.0
                     
                     strongSelf.shapeLayer?.shadowOffset = CGSize(width: -1, height: 2)
                     strongSelf.shapeLayer?.shadowOpacity = 0.5
                     strongSelf.shapeLayer?.shadowRadius = 5.0
-                    strongSelf.shapeLayer?.shadowColor = UIColor.blackColor().CGColor
+                    strongSelf.shapeLayer?.shadowColor = UIColor.black.cgColor
                     strongSelf.shapeLayer?.masksToBounds = false
                     strongSelf.layer.insertSublayer(strongSelf.shapeLayer!, below: strongSelf.ballImageView?.layer)
                 }
-                strongSelf.shapeLayer?.path = path.CGPath
+                strongSelf.shapeLayer?.path = path.cgPath
             }
         }
         
         // MARK : UICollisionBehavior
         
         let collision = UICollisionBehavior(items: [panView!])
-        collision.addBoundaryWithIdentifier("Left", fromPoint: CGPoint(x: -1, y: 0), toPoint: CGPoint(x: -1, y: bounds.size.height))
-        collision.addBoundaryWithIdentifier("Right", fromPoint: CGPoint(x: bounds.width+1, y: 0), toPoint:CGPoint(x: bounds.width+1, y: bounds.height))
-        collision.addBoundaryWithIdentifier("Middle", fromPoint: CGPoint(x: 0, y: bounds.height/2), toPoint: CGPoint(x: bounds.width, y: bounds.height/2))
+        collision.addBoundary(withIdentifier: "Left" as NSCopying, from: CGPoint(x: -1, y: 0), to: CGPoint(x: -1, y: bounds.size.height))
+        collision.addBoundary(withIdentifier: "Right" as NSCopying, from: CGPoint(x: bounds.width+1, y: 0), to:CGPoint(x: bounds.width+1, y: bounds.height))
+        collision.addBoundary(withIdentifier: "Middle" as NSCopying, from: CGPoint(x: 0, y: bounds.height/2), to: CGPoint(x: bounds.width, y: bounds.height/2))
         animator?.addBehavior(collision)
         
         // MARK : UIAttachmentBehaviors
         
-        let attach1 = UIAttachmentBehavior(item: panView!, attachedToItem: topView!)
+        let attach1 = UIAttachmentBehavior(item: panView!, attachedTo: topView!)
         animator?.addBehavior(attach1)
         
-        let attach2 = UIAttachmentBehavior(item: topView!, attachedToItem: bottomView!)
+        let attach2 = UIAttachmentBehavior(item: topView!, attachedTo: bottomView!)
         animator?.addBehavior(attach2)
         
-        let attach3 = UIAttachmentBehavior(item: bottomView!, offsetFromCenter: UIOffset(horizontal: 0, vertical: 0), attachedToItem: ballImageView!, offsetFromCenter: UIOffset(horizontal: 0, vertical: -ballImageView!.bounds.height/2))
+        let attach3 = UIAttachmentBehavior(item: bottomView!, offsetFromCenter: UIOffset(horizontal: 0, vertical: 0), attachedTo: ballImageView!, offsetFromCenter: UIOffset(horizontal: 0, vertical: -ballImageView!.bounds.height/2))
         animator?.addBehavior(attach3)
 
         // MARK : UIDynamicItemBehavior
@@ -137,21 +137,21 @@ class DynamicView: UIView {
         animator?.addBehavior(panItem)
     }
     
-    @objc private func handlePanGesture(gesture: UIPanGestureRecognizer){
-        let translation = gesture.translationInView(gesture.view)
+    @objc fileprivate func handlePanGesture(_ gesture: UIPanGestureRecognizer){
+        let translation = gesture.translation(in: gesture.view)
         if !((gesture.view?.center.y)! + translation.y > bounds.height/2 - (gesture.view?.bounds.height)!/2){
             gesture.view?.center = CGPoint(x: (gesture.view?.center.x)!, y: (gesture.view?.center.y)! + translation.y)
-            gesture.setTranslation(CGPoint(x:0, y:0), inView: gesture.view)
+            gesture.setTranslation(CGPoint(x:0, y:0), in: gesture.view)
         }
         
         if let animator = animator{
             switch gesture.state {
-            case .Began: animator.removeBehavior(panGravity!)
-            case .Changed:break;
-            case .Ended: animator.addBehavior(panGravity!)
+            case .began: animator.removeBehavior(panGravity!)
+            case .changed:break;
+            case .ended: animator.addBehavior(panGravity!)
             default:break
             }
-            animator.updateItemUsingCurrentState(gesture.view!)
+            animator.updateItem(usingCurrentState: gesture.view!)
         }
     }
     
