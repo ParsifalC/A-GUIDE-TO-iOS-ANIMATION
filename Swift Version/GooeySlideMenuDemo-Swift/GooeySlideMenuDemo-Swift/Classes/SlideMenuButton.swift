@@ -16,44 +16,44 @@ struct MenuButtonOptions {
 
 class SlideMenuButton: UIView {
 
-    private var _option: MenuButtonOptions
+    fileprivate var _option: MenuButtonOptions
     
     init(option: MenuButtonOptions) {
         _option = option
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextAddRect(context, rect)
+        context?.addRect(rect)
         _option.buttonColor.set()
-        CGContextFillPath(context)
+        context?.fillPath()
         
-        let roundedRectanglePath = UIBezierPath(roundedRect: CGRectInset(rect, 1, 1), cornerRadius: rect.height / 2)
+        let roundedRectanglePath = UIBezierPath(roundedRect: rect.insetBy(dx: 1, dy: 1), cornerRadius: rect.height / 2)
         _option.buttonColor.setFill()
         roundedRectanglePath.fill()
-        UIColor.whiteColor().setStroke()
+        UIColor.white.setStroke()
         roundedRectanglePath.lineWidth = 1
         roundedRectanglePath.stroke()
 
-        let paragraphStyle = NSParagraphStyle.defaultParagraphStyle().mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.alignment = .Center
-        let attr = [NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: UIFont.systemFontOfSize(24.0),NSForegroundColorAttributeName: UIColor.whiteColor()]
-        let size = _option.title.sizeWithAttributes(attr)
+        let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.alignment = .center
+        let attr = [NSParagraphStyleAttributeName: paragraphStyle, NSFontAttributeName: UIFont.systemFont(ofSize: 24.0),NSForegroundColorAttributeName: UIColor.white]
+        let size = _option.title.size(attributes: attr)
         
-        let r = CGRectMake(rect.origin.x,
-            rect.origin.y + (rect.size.height - size.height)/2.0,
-            rect.size.width,
-            size.height)
-        _option.title.drawInRect(r, withAttributes: attr)
+        let r = CGRect(x: rect.origin.x,
+            y: rect.origin.y + (rect.size.height - size.height)/2.0,
+            width: rect.size.width,
+            height: size.height)
+        _option.title.draw(in: r, withAttributes: attr)
 
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if let touch = touch {
             let tapCount = touch.tapCount

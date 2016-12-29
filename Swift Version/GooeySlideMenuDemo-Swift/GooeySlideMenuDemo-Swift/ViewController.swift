@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let menuOptions = MenuOptions(
             titles:["首页","消息","发布","发现","个人","设置"],
             buttonHeight: 40.0, menuColor: UIColor(red: 0.0, green: 0.722, blue: 1.0, alpha: 1.0),
-            blurStyle: .Dark,
+            blurStyle: .dark,
             buttonSpace: 30.0,
             menuBlankWidth: 50.0,
             menuClickBlock: { (index,title,titleCounts) in
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         menu = GooeySlideMenu(options: menuOptions)
     }
 
-    @IBAction func didButtonTapped(sender: AnyObject) {
+    @IBAction func didButtonTapped(_ sender: AnyObject) {
         menu?.trigger()
     }
     
@@ -39,15 +39,15 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let demoCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let demoCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         demoCell.textLabel?.text = "NO.\(indexPath.row+1)"
         return demoCell
     }
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
 }

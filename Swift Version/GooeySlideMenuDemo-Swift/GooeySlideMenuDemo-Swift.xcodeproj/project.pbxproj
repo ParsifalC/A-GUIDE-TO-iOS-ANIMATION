@@ -14,8 +14,8 @@
 		5F3130D31C37CEB8006EF060 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F3130D11C37CEB8006EF060 /* LaunchScreen.storyboard */; };
 		5F3130DE1C37CEBA006EF060 /* GooeySlideMenuDemo_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130DD1C37CEBA006EF060 /* GooeySlideMenuDemo_SwiftTests.swift */; };
 		5F3130E91C37CEBA006EF060 /* GooeySlideMenuDemo_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130E81C37CEBA006EF060 /* GooeySlideMenuDemo_SwiftUITests.swift */; };
-		5F3130F71C395FAE006EF060 /* GooeySlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130F61C395FAE006EF060 /* GooeySlideMenu.swift */; settings = {ASSET_TAGS = (); }; };
-		5F3130F91C395FBE006EF060 /* SlideMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130F81C395FBE006EF060 /* SlideMenuButton.swift */; settings = {ASSET_TAGS = (); }; };
+		5F3130F71C395FAE006EF060 /* GooeySlideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130F61C395FAE006EF060 /* GooeySlideMenu.swift */; };
+		5F3130F91C395FBE006EF060 /* SlideMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3130F81C395FBE006EF060 /* SlideMenuButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,18 +201,21 @@
 		5F3130BD1C37CEB7006EF060 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kitten Yang";
 				TargetAttributes = {
 					5F3130C41C37CEB7006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					5F3130D81C37CEB9006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5F3130C41C37CEB7006EF060;
 					};
 					5F3130E31C37CEBA006EF060 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5F3130C41C37CEB7006EF060;
 					};
 				};
@@ -340,8 +343,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -385,8 +390,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -405,6 +412,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -418,6 +426,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -429,6 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -440,6 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GooeySlideMenuDemo-Swift.app/GooeySlideMenuDemo-Swift";
 			};
 			name = Debug;
@@ -452,6 +463,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GooeySlideMenuDemo-Swift.app/GooeySlideMenuDemo-Swift";
 			};
 			name = Release;
@@ -463,6 +475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "GooeySlideMenuDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -475,6 +488,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.GooeySlideMenuDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "GooeySlideMenuDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -499,6 +513,7 @@
 				5F3130EF1C37CEBB006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F3130F01C37CEBB006EF060 /* Build configuration list for PBXNativeTarget "GooeySlideMenuDemo-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +522,7 @@
 				5F3130F21C37CEBB006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F3130F31C37CEBB006EF060 /* Build configuration list for PBXNativeTarget "GooeySlideMenuDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +531,7 @@
 				5F3130F51C37CEBB006EF060 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
