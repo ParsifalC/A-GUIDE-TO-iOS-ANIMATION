@@ -11,7 +11,7 @@ import UIKit
 
 struct GridReplicatorLayer: Replicatable {
     
-    func configureReplicatorLayer(layer: CALayer, option: Options) {
+    func configureReplicatorLayer(_ layer: CALayer, option: Options) {
 
         func setUp() {
             let nbColumn = 3
@@ -26,8 +26,8 @@ struct GridReplicatorLayer: Replicatable {
                 width:dotSize,
                 height: dotSize)
             
-            dot.path = UIBezierPath(ovalInRect: CGRect(x: 0, y:0, width: dotSize, height: dotSize)).CGPath
-            dot.fillColor = option.color.CGColor
+            dot.path = UIBezierPath(ovalIn: CGRect(x: 0, y:0, width: dotSize, height: dotSize)).cgPath
+            dot.fillColor = option.color.cgColor
             
             let replicatorLayerX = CAReplicatorLayer()
             replicatorLayerX.frame = CGRect(x: 0,y: 0,width: size,height: size)
@@ -59,14 +59,14 @@ struct GridReplicatorLayer: Replicatable {
             groupAnimation.autoreverses = true
             groupAnimation.repeatCount = HUGE
             
-            dot.addAnimation(groupAnimation, forKey: "groupAnimation")
+            dot.add(groupAnimation, forKey: "groupAnimation")
         }
         setUp()
         
         func alphaAnimation() -> CABasicAnimation{
             let alphaAnim = CABasicAnimation(keyPath: "opacity")
-            alphaAnim.fromValue = NSNumber(float: option.alpha)
-            alphaAnim.toValue = NSNumber(float: 0.3)
+            alphaAnim.fromValue = NSNumber(value: option.alpha as Float)
+            alphaAnim.toValue = NSNumber(value: 0.3 as Float)
             return alphaAnim
         }
         func scaleAnimation() -> CABasicAnimation{
@@ -74,9 +74,9 @@ struct GridReplicatorLayer: Replicatable {
             
             let t = CATransform3DIdentity
             let t2 = CATransform3DScale(t, 1.0, 1.0, 0.0)
-            scaleAnim.fromValue = NSValue.init(CATransform3D: t2)
+            scaleAnim.fromValue = NSValue.init(caTransform3D: t2)
             let t3 = CATransform3DScale(t, 0.2, 0.2, 0.0)
-            scaleAnim.toValue = NSValue.init(CATransform3D: t3)
+            scaleAnim.toValue = NSValue.init(caTransform3D: t3)
             
             return scaleAnim
         }

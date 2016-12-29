@@ -11,7 +11,7 @@ import UIKit
 
 struct DotsFlipReplicatorLayer: Replicatable {
     
-    func configureReplicatorLayer(layer: CALayer, option: Options) {
+    func configureReplicatorLayer(_ layer: CALayer, option: Options) {
         
         func setUp() {
             let marginBetweenDot: CGFloat = 5.0
@@ -25,8 +25,8 @@ struct DotsFlipReplicatorLayer: Replicatable {
                 width:dotSize,
                 height: dotSize)
             
-            dot.path = UIBezierPath(rect: CGRect(x: 0, y:0, width: dotSize, height: dotSize)).CGPath
-            dot.fillColor = option.color.CGColor
+            dot.path = UIBezierPath(rect: CGRect(x: 0, y:0, width: dotSize, height: dotSize)).cgPath
+            dot.fillColor = option.color.cgColor
             
             let replicatorLayer = CAReplicatorLayer()
             replicatorLayer.frame = CGRect(x: 0,y: 0,width: size, height: size)
@@ -37,7 +37,7 @@ struct DotsFlipReplicatorLayer: Replicatable {
             
             replicatorLayer.addSublayer(dot)
             layer.addSublayer(replicatorLayer)
-            dot.addAnimation(flipAnimation(), forKey: "scaleAnimation")
+            dot.add(flipAnimation(), forKey: "scaleAnimation")
         }
         setUp()
         
@@ -46,9 +46,9 @@ struct DotsFlipReplicatorLayer: Replicatable {
             
             let t = CATransform3DIdentity
             let t2 = CATransform3DRotate(t, CGFloat(0.0), 0.0, 1.0, 0.0)
-            scaleAnim.fromValue = NSValue.init(CATransform3D: t2)
+            scaleAnim.fromValue = NSValue.init(caTransform3D: t2)
             let t3 = CATransform3DRotate(t, CGFloat(M_PI), 0.0, 1.0, 0.0)
-            scaleAnim.toValue = NSValue.init(CATransform3D: t3)
+            scaleAnim.toValue = NSValue.init(caTransform3D: t3)
             scaleAnim.repeatCount = HUGE
             scaleAnim.duration = 0.6
             

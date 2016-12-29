@@ -221,13 +221,16 @@
 				TargetAttributes = {
 					5FE4F0671C6147B00029AC3F = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 					};
 					5FE4F07B1C6147B00029AC3F = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FE4F0671C6147B00029AC3F;
 					};
 					5FE4F0861C6147B00029AC3F = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FE4F0671C6147B00029AC3F;
 					};
 				};
@@ -435,6 +438,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -446,6 +450,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -457,6 +462,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReplicatorLoaderDemo-Swift.app/ReplicatorLoaderDemo-Swift";
 			};
 			name = Debug;
@@ -469,6 +475,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReplicatorLoaderDemo-Swift.app/ReplicatorLoaderDemo-Swift";
 			};
 			name = Release;
@@ -480,6 +487,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "ReplicatorLoaderDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -492,6 +500,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ReplicatorLoaderDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "ReplicatorLoaderDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -516,6 +525,7 @@
 				5FE4F0921C6147B00029AC3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FE4F0931C6147B00029AC3F /* Build configuration list for PBXNativeTarget "ReplicatorLoaderDemo-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +534,7 @@
 				5FE4F0951C6147B00029AC3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FE4F0961C6147B00029AC3F /* Build configuration list for PBXNativeTarget "ReplicatorLoaderDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +543,7 @@
 				5FE4F0981C6147B00029AC3F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

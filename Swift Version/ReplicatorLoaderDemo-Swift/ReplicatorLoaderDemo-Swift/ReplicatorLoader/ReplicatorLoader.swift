@@ -14,17 +14,17 @@ struct Options {
 }
 
 enum LoaderType {
-    case Pulse(option: Options)
-    case DotsFlip(option: Options)
-    case GridScale(option: Options)
+    case pulse(option: Options)
+    case dotsFlip(option: Options)
+    case gridScale(option: Options)
     
     var replicatorLayer: Replicatable{
         switch self {
-        case .Pulse(_):
+        case .pulse(_):
             return PulseReplicatorLayer()
-        case .DotsFlip(_):
+        case .dotsFlip(_):
             return DotsFlipReplicatorLayer()
-        case .GridScale(_):
+        case .gridScale(_):
             return GridReplicatorLayer()
         }
     }
@@ -32,7 +32,7 @@ enum LoaderType {
 }
 
 protocol Replicatable {
-    func configureReplicatorLayer(layer: CALayer, option: Options)
+    func configureReplicatorLayer(_ layer: CALayer, option: Options)
 }
 
 class ReplicatorLoader: UIView {
@@ -42,13 +42,13 @@ class ReplicatorLoader: UIView {
         setUp(type)
     }
     
-    private func setUp(type: LoaderType) {
+    fileprivate func setUp(_ type: LoaderType) {
         switch type {
-        case let .Pulse(option):
+        case let .pulse(option):
             type.replicatorLayer.configureReplicatorLayer(layer, option: option)
-        case let .DotsFlip(option):
+        case let .dotsFlip(option):
             type.replicatorLayer.configureReplicatorLayer(layer, option: option)
-        case let .GridScale(option):
+        case let .gridScale(option):
             type.replicatorLayer.configureReplicatorLayer(layer, option: option)
         }
     }

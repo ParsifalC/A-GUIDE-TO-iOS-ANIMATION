@@ -11,14 +11,14 @@ import UIKit
 
 struct PulseReplicatorLayer: Replicatable {
     
-    func configureReplicatorLayer(layer: CALayer, option: Options) {
+    func configureReplicatorLayer(_ layer: CALayer, option: Options) {
 
         let pulseLayer = CAShapeLayer()
         
         func setUp() {
             pulseLayer.frame = layer.bounds
-            pulseLayer.path  = UIBezierPath(ovalInRect: pulseLayer.bounds).CGPath
-            pulseLayer.fillColor = option.color.CGColor
+            pulseLayer.path  = UIBezierPath(ovalIn: pulseLayer.bounds).cgPath
+            pulseLayer.fillColor = option.color.cgColor
             
             let replicatorLayer = CAReplicatorLayer()
             replicatorLayer.frame = layer.bounds
@@ -36,14 +36,14 @@ struct PulseReplicatorLayer: Replicatable {
             groupAnimation.duration = 4.0
             groupAnimation.autoreverses = false
             groupAnimation.repeatCount = HUGE
-            pulseLayer.addAnimation(groupAnimation, forKey: "groupAnimation")
+            pulseLayer.add(groupAnimation, forKey: "groupAnimation")
         }
         startToPluse()
         
         func alphaAnimation() -> CABasicAnimation{
             let alphaAnim = CABasicAnimation(keyPath: "opacity")
-            alphaAnim.fromValue = NSNumber(float: option.alpha)
-            alphaAnim.toValue = NSNumber(float: 0.0)
+            alphaAnim.fromValue = NSNumber(value: option.alpha as Float)
+            alphaAnim.toValue = NSNumber(value: 0.0 as Float)
             return alphaAnim
         }
         
@@ -52,9 +52,9 @@ struct PulseReplicatorLayer: Replicatable {
             
             let t = CATransform3DIdentity
             let t2 = CATransform3DScale(t, 0.0, 0.0, 0.0)
-            scaleAnim.fromValue = NSValue.init(CATransform3D: t2)
+            scaleAnim.fromValue = NSValue.init(caTransform3D: t2)
             let t3 = CATransform3DScale(t, 1.0, 1.0, 0.0)
-            scaleAnim.toValue = NSValue.init(CATransform3D: t3)
+            scaleAnim.toValue = NSValue.init(caTransform3D: t3)
             return scaleAnim
         }
 
