@@ -10,17 +10,17 @@ import UIKit
 
 class tvOSCardView: UIView {
 
-    private var cardImageView: UIImageView!
-    private var cardParallaxView: UIImageView!
+    fileprivate var cardImageView: UIImageView!
+    fileprivate var cardParallaxView: UIImageView!
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         setUpViews()
     }
     
-    private func setUpViews() {
-        layer.shadowColor = UIColor.blackColor().CGColor
-        layer.shadowOffset = CGSizeMake(0, 10)
+    fileprivate func setUpViews() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 10)
         layer.shadowRadius = 10.0
         layer.shadowOpacity = 0.3
         
@@ -30,7 +30,7 @@ class tvOSCardView: UIView {
         cardImageView.clipsToBounds = true
         addSubview(cardImageView)
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: "panInCard:")
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(tvOSCardView.panInCard(_:)))
         addGestureRecognizer(panGesture)
 
         cardParallaxView = UIImageView(frame: cardImageView.frame)
@@ -40,18 +40,18 @@ class tvOSCardView: UIView {
         
     }
     
-    @objc private func panInCard(panGes: UIPanGestureRecognizer) {
-        let touchPoint = panGes.locationInView(self)
+    @objc fileprivate func panInCard(_ panGes: UIPanGestureRecognizer) {
+        let touchPoint = panGes.location(in: self)
         
-        if panGes.state == .Changed {
+        if panGes.state == .changed {
             let xFactor = min(1.0, max(-1, (touchPoint.x - (self.bounds.size.width/2)) / (self.bounds.size.width/2)))
             let yFactor = min(1.0, max(-1, (touchPoint.y - (self.bounds.size.height/2)) / (self.bounds.size.height/2)))
             cardImageView.layer.transform = transformWithM34(CGFloat(-1.0/500), xf: xFactor, yf: yFactor)
             
             cardParallaxView.layer.transform = transformWithM34(CGFloat(-1.0/250), xf: xFactor, yf: yFactor)
             
-        } else if panGes.state == .Ended {
-            UIView.animateWithDuration(0.3, animations: { [weak self] () -> Void in
+        } else if panGes.state == .ended {
+            UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
                 if let strongSelf = self {
                     strongSelf.cardImageView.layer.transform = CATransform3DIdentity
                     strongSelf.cardParallaxView.layer.transform = CATransform3DIdentity
@@ -65,7 +65,7 @@ class tvOSCardView: UIView {
 // MARK : Helper Method
 
 extension tvOSCardView {
-    private func transformWithM34(m34: CGFloat, xf: CGFloat, yf: CGFloat) -> CATransform3D {
+    fileprivate func transformWithM34(_ m34: CGFloat, xf: CGFloat, yf: CGFloat) -> CATransform3D {
         var t = CATransform3DIdentity
         t.m34  = m34
         t = CATransform3DRotate(t, CGFloat(M_PI / 9) * yf, -1, 0, 0)
