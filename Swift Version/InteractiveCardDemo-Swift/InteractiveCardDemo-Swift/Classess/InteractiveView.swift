@@ -8,14 +8,14 @@
 
 import UIKit
 
-let SCREENWIDTH  = UIScreen.mainScreen().bounds.width
-let SCREENHEIGHT = UIScreen.mainScreen().bounds.height
+let SCREENWIDTH  = UIScreen.main.bounds.width
+let SCREENHEIGHT = UIScreen.main.bounds.height
 //let ANIMATEDURATION = 0.5
 //let ANIMATEDAMPING = 0.7
 //let SCROLLDISTANCE = 200.0
 
 struct InteractiveOptions {
-    var duration: NSTimeInterval = 0.3
+    var duration: TimeInterval = 0.3
     var damping: CGFloat = 0.6
     var scrollDistance: CGFloat = 100.0
 }
@@ -23,11 +23,11 @@ struct InteractiveOptions {
 class InteractiveView: UIImageView {
 
     var _option: InteractiveOptions
-    var initialPoint: CGPoint = CGPointZero
+    var initialPoint: CGPoint = CGPoint.zero
     var dimmingView: UIView?
     var gestureView: UIView? {
         didSet{
-            let panGesture = UIPanGestureRecognizer(target: self, action: "panGestureRecognized:")
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(InteractiveView.panGestureRecognized(_:)))
             gestureView?.addGestureRecognizer(panGesture)
         }
     }
@@ -35,29 +35,29 @@ class InteractiveView: UIImageView {
     init(image: UIImage?, option: InteractiveOptions) {
         _option = option
         super.init(image: image)
-        contentMode = .ScaleAspectFill
+        contentMode = .scaleAspectFill
         layer.cornerRadius = 7.0
         layer.masksToBounds = true
     }
 
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         initialPoint = center
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc private func panGestureRecognized(pan: UIPanGestureRecognizer) {
+    @objc fileprivate func panGestureRecognized(_ pan: UIPanGestureRecognizer) {
         
         var factorOfAngle: CGFloat = 0.0
         var factorOfScale: CGFloat = 0.0
-        let transition = pan.translationInView(superview)
+        let transition = pan.translation(in: superview)
         
-        if pan.state == .Began {
+        if pan.state == .began {
             
-        } else if pan.state == .Changed {
-            center = CGPointMake(initialPoint.x, initialPoint.y + transition.y)
+        } else if pan.state == .changed {
+            center = CGPoint(x: initialPoint.x, y: initialPoint.y + transition.y)
             let Y = min(CGFloat(_option.scrollDistance), max(0, abs(transition.y)))
             //一个开口向下,顶点(SCROLLDISTANCE/2,1),过(0,0),(SCROLLDISTANCE,0)的二次函数
             factorOfAngle = max(0.0,-4.0/(CGFloat(_option.scrollDistance)*CGFloat(_option.scrollDistance))*Y*(Y-CGFloat(_option.scrollDistance)));
@@ -70,8 +70,8 @@ class InteractiveView: UIImageView {
             layer.transform = t
             dimmingView?.alpha = 1.0 - Y / _option.scrollDistance
             
-        } else if pan.state == .Ended || pan.state == .Cancelled {
-            UIView.animateWithDuration(_option.duration, delay: 0.0, usingSpringWithDamping: _option.damping, initialSpringVelocity: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        } else if pan.state == .ended || pan.state == .cancelled {
+            UIView.animate(withDuration: _option.duration, delay: 0.0, usingSpringWithDamping: _option.damping, initialSpringVelocity: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
                     self.layer.transform = CATransform3DIdentity
                     self.center = self.initialPoint
                     self.dimmingView?.alpha = 1.0

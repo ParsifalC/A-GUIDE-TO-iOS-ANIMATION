@@ -20,10 +20,10 @@ class ViewController: UIViewController {
         
         let interactiveView = InteractiveView(image: UIImage(named: "pic01"), option: option)
         interactiveView.center = view.center
-        interactiveView.bounds = CGRectMake(0, 0, 200, 150)
+        interactiveView.bounds = CGRect(x: 0, y: 0, width: 200, height: 150)
         interactiveView.gestureView = view
 
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         blurView.frame = view.bounds
         view.addSubview(blurView)
         interactiveView.dimmingView = blurView

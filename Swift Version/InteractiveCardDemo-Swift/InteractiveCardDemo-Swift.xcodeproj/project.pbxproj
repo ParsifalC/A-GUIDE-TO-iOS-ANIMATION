@@ -14,7 +14,7 @@
 		5FFE11321C3CD890001AE2AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE11301C3CD890001AE2AC /* LaunchScreen.storyboard */; };
 		5FFE113D1C3CD891001AE2AC /* InteractiveCardDemo_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE113C1C3CD891001AE2AC /* InteractiveCardDemo_SwiftTests.swift */; };
 		5FFE11481C3CD891001AE2AC /* InteractiveCardDemo_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11471C3CD891001AE2AC /* InteractiveCardDemo_SwiftUITests.swift */; };
-		5FFE11561C3CE7D6001AE2AC /* InteractiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11551C3CE7D6001AE2AC /* InteractiveView.swift */; settings = {ASSET_TAGS = (); }; };
+		5FFE11561C3CE7D6001AE2AC /* InteractiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11551C3CE7D6001AE2AC /* InteractiveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,13 +203,16 @@
 				TargetAttributes = {
 					5FFE11231C3CD890001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					5FFE11371C3CD891001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE11231C3CD890001AE2AC;
 					};
 					5FFE11421C3CD891001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE11231C3CD890001AE2AC;
 					};
 				};
@@ -415,6 +418,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -427,6 +431,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -438,6 +443,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InteractiveCardDemo-Swift.app/InteractiveCardDemo-Swift";
 			};
 			name = Debug;
@@ -450,6 +456,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InteractiveCardDemo-Swift.app/InteractiveCardDemo-Swift";
 			};
 			name = Release;
@@ -461,6 +468,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "InteractiveCardDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -473,6 +481,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.InteractiveCardDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "InteractiveCardDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -497,6 +506,7 @@
 				5FFE114E1C3CD891001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FFE114F1C3CD891001AE2AC /* Build configuration list for PBXNativeTarget "InteractiveCardDemo-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +515,7 @@
 				5FFE11511C3CD891001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FFE11521C3CD891001AE2AC /* Build configuration list for PBXNativeTarget "InteractiveCardDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +524,7 @@
 				5FFE11541C3CD891001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
