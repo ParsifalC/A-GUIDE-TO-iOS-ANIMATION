@@ -10,19 +10,19 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
-    private var percentTransition: UIPercentDrivenInteractiveTransition?
+    fileprivate var percentTransition: UIPercentDrivenInteractiveTransition?
     
     // MARK : Lift Circle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let edgeGes = UIScreenEdgePanGestureRecognizer(target: self, action: "edgePan:")
-        edgeGes.edges = .Left
+        let edgeGes = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(SecondViewController.edgePan(_:)))
+        edgeGes.edges = .left
         view.addGestureRecognizer(edgeGes)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.delegate = self
     }
@@ -33,39 +33,39 @@ class SecondViewController: UIViewController {
 
     // MARK : Gesture Method
     
-    @objc private func edgePan(recognizer: UIPanGestureRecognizer) {
+    @objc fileprivate func edgePan(_ recognizer: UIPanGestureRecognizer) {
 
-        var per = recognizer.translationInView(view).x / view.bounds.size.width
+        var per = recognizer.translation(in: view).x / view.bounds.size.width
         per = min(1.0, max(0.0, per))
         
-        if recognizer.state == .Began {
+        if recognizer.state == .began {
             percentTransition = UIPercentDrivenInteractiveTransition()
-            navigationController?.popViewControllerAnimated(true)
-        } else if recognizer.state == .Changed {
-            percentTransition?.updateInteractiveTransition(per)
-        } else if recognizer.state == .Cancelled || recognizer.state == .Ended {
+            navigationController?.popViewController(animated: true)
+        } else if recognizer.state == .changed {
+            percentTransition?.update(per)
+        } else if recognizer.state == .cancelled || recognizer.state == .ended {
             if per > 0.3 {
-                percentTransition?.finishInteractiveTransition()
+                percentTransition?.finish()
             } else {
-                percentTransition?.cancelInteractiveTransition()
+                percentTransition?.cancel()
             }
             percentTransition = nil
         }
     }
     
     
-    @IBAction func didTapBackButton(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    @IBAction func didTapBackButton(_ sender: AnyObject) {
+        navigationController?.popViewController(animated: true)
     }
 }
 
 extension SecondViewController: UINavigationControllerDelegate {
-    func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, interactionControllerFor animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return percentTransition
     }
 
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .Pop {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .pop {
             let pingInvert = PingInvertTransition()
             return pingInvert
         } else {
