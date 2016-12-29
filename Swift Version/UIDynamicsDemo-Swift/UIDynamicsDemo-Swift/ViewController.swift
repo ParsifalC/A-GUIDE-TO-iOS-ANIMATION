@@ -11,36 +11,36 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var restoreButton: UIButton!
-    private var lockScreenView: UIImageView!
-    private var animator: UIDynamicAnimator!
-    private var gravityBehaviour: UIGravityBehavior!
-    private var pushBehavior: UIPushBehavior!
-    private var attachmentBehaviour: UIAttachmentBehavior!
-    private var itemBehaviour: UIDynamicItemBehavior!
+    fileprivate var lockScreenView: UIImageView!
+    fileprivate var animator: UIDynamicAnimator!
+    fileprivate var gravityBehaviour: UIGravityBehavior!
+    fileprivate var pushBehavior: UIPushBehavior!
+    fileprivate var attachmentBehaviour: UIAttachmentBehavior!
+    fileprivate var itemBehaviour: UIDynamicItemBehavior!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lockScreenView = UIImageView(frame: view.bounds)
         lockScreenView.image = UIImage(named: "lockScreen")
-        lockScreenView.contentMode = .ScaleToFill
-        lockScreenView.userInteractionEnabled = true
+        lockScreenView.contentMode = .scaleToFill
+        lockScreenView.isUserInteractionEnabled = true
         view.addSubview(lockScreenView)
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tapOnIt:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapOnIt(_:)))
         lockScreenView.addGestureRecognizer(tapGesture)
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: "panOnIt:")
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(ViewController.panOnIt(_:)))
         lockScreenView.addGestureRecognizer(panGesture)
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         animator = UIDynamicAnimator(referenceView: view)
         let collisionBehaviour = UICollisionBehavior(items: [lockScreenView])
-        collisionBehaviour.setTranslatesReferenceBoundsIntoBoundaryWithInsets(UIEdgeInsets(top: -lockScreenView.frame.height, left: 0, bottom: 0, right: 0))
+        collisionBehaviour.setTranslatesReferenceBoundsIntoBoundary(with: UIEdgeInsets(top: -lockScreenView.frame.height, left: 0, bottom: 0, right: 0))
         animator.addBehavior(collisionBehaviour)
         
         gravityBehaviour = UIGravityBehavior(items: [lockScreenView])
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         gravityBehaviour.magnitude = 2.6
         animator.addBehavior(gravityBehaviour)
         
-        pushBehavior = UIPushBehavior(items: [lockScreenView], mode: .Instantaneous)
+        pushBehavior = UIPushBehavior(items: [lockScreenView], mode: .instantaneous)
         pushBehavior.magnitude = 2.0
         pushBehavior.angle = CGFloat(M_PI)
         animator.addBehavior(pushBehavior)
@@ -62,21 +62,21 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    @objc private func tapOnIt(tapGes: UITapGestureRecognizer) {
+    @objc fileprivate func tapOnIt(_ tapGes: UITapGestureRecognizer) {
         pushBehavior.pushDirection = CGVector(dx: 0.0, dy: -80.0)
         pushBehavior.active = true
     }
     
-    @objc private func panOnIt(panGes: UIPanGestureRecognizer) {
-        let location = CGPoint(x: CGRectGetMidX(lockScreenView.frame), y: panGes.locationInView(view).y)
-        if panGes.state == .Began {
+    @objc fileprivate func panOnIt(_ panGes: UIPanGestureRecognizer) {
+        let location = CGPoint(x: lockScreenView.frame.midX, y: panGes.location(in: view).y)
+        if panGes.state == .began {
             animator.removeBehavior(gravityBehaviour)
             attachmentBehaviour = UIAttachmentBehavior(item: lockScreenView, attachedToAnchor: location)
             animator.addBehavior(attachmentBehaviour)
-        } else if panGes.state == .Changed {
+        } else if panGes.state == .changed {
             attachmentBehaviour.anchorPoint = location
-        } else if panGes.state == .Ended {
-            let velocity = panGes.velocityInView(lockScreenView)
+        } else if panGes.state == .ended {
+            let velocity = panGes.velocity(in: lockScreenView)
             animator.removeBehavior(attachmentBehaviour)
             attachmentBehaviour = nil
             if velocity.y < -1300 {
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func restore(sender: AnyObject) {
+    @IBAction func restore(_ sender: AnyObject) {
 
         animator.removeBehavior(gravityBehaviour)
         animator.removeBehavior(itemBehaviour)
