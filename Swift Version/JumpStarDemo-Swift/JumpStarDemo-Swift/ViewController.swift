@@ -17,14 +17,14 @@ class ViewController: UIViewController {
         jumpStarView.layoutIfNeeded()
         let option = JumpStarOptions(markedImage: UIImage(named: "icon_star_incell")!, notMarkedImage: UIImage(named: "blue_dot")!, jumpDuration: 0.125, downDuration: 0.215)
         jumpStarView.option = option
-        jumpStarView.state = .NotMarked
+        jumpStarView.state = .notMarked
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    @IBAction func jumpButtonDidTapped(sender: AnyObject) {
+    @IBAction func jumpButtonDidTapped(_ sender: AnyObject) {
         jumpStarView.animate()
     }
 

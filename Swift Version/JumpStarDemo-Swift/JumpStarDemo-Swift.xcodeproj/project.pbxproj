@@ -14,7 +14,7 @@
 		5FFE116F1C3D02A7001AE2AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE116D1C3D02A7001AE2AC /* LaunchScreen.storyboard */; };
 		5FFE117A1C3D02AA001AE2AC /* JumpStarDemo_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11791C3D02AA001AE2AC /* JumpStarDemo_SwiftTests.swift */; };
 		5FFE11851C3D02AA001AE2AC /* JumpStarDemo_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11841C3D02AA001AE2AC /* JumpStarDemo_SwiftUITests.swift */; };
-		5FFE11931C3D02E2001AE2AC /* JumpStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11921C3D02E2001AE2AC /* JumpStarView.swift */; settings = {ASSET_TAGS = (); }; };
+		5FFE11931C3D02E2001AE2AC /* JumpStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11921C3D02E2001AE2AC /* JumpStarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,18 +198,21 @@
 		5FFE11591C3D02A5001AE2AC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kitten Yang";
 				TargetAttributes = {
 					5FFE11601C3D02A5001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					5FFE11741C3D02AA001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE11601C3D02A5001AE2AC;
 					};
 					5FFE117F1C3D02AA001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE11601C3D02A5001AE2AC;
 					};
 				};
@@ -336,8 +339,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -381,8 +386,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -401,6 +408,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -415,6 +423,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -427,6 +436,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -438,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JumpStarDemo-Swift.app/JumpStarDemo-Swift";
 			};
 			name = Debug;
@@ -450,6 +461,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JumpStarDemo-Swift.app/JumpStarDemo-Swift";
 			};
 			name = Release;
@@ -461,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "JumpStarDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -473,6 +486,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.JumpStarDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "JumpStarDemo-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -497,6 +511,7 @@
 				5FFE118B1C3D02AA001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FFE118C1C3D02AA001AE2AC /* Build configuration list for PBXNativeTarget "JumpStarDemo-SwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +520,7 @@
 				5FFE118E1C3D02AA001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5FFE118F1C3D02AA001AE2AC /* Build configuration list for PBXNativeTarget "JumpStarDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +529,7 @@
 				5FFE11911C3D02AA001AE2AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

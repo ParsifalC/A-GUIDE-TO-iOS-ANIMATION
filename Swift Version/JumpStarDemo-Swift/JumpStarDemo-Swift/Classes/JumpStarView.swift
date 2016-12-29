@@ -9,37 +9,37 @@
 import UIKit
 
 enum SelectState {
-    case NotMarked;
-    case Marked
+    case notMarked;
+    case marked
 }
 
 struct JumpStarOptions {
     var markedImage: UIImage
     var notMarkedImage: UIImage
-    var jumpDuration: NSTimeInterval
-    var downDuration: NSTimeInterval
+    var jumpDuration: TimeInterval
+    var downDuration: TimeInterval
 }
 
-class JumpStarView: UIView {
+class JumpStarView: UIView, CAAnimationDelegate {
     
     var option: JumpStarOptions?
     
-    var state: SelectState = .NotMarked {
+    var state: SelectState = .notMarked {
         didSet{
-            starView.image = state == .Marked ? option?.markedImage : option?.notMarkedImage
+            starView.image = state == .marked ? option?.markedImage : option?.notMarkedImage
         }
     }
     
-    private var starView: UIImageView!
-    private var shadowView: UIImageView!
-    private var animating: Bool = false
+    fileprivate var starView: UIImageView!
+    fileprivate var shadowView: UIImageView!
+    fileprivate var animating: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         if starView == nil {
             starView = UIImageView(frame: CGRect(x: bounds.width/2 - (bounds.width-6)/2, y: 0, width: bounds.width-6, height: bounds.height-6))
-            starView.contentMode = .ScaleToFill
+            starView.contentMode = .scaleToFill
             addSubview(starView)
         }
         
@@ -72,11 +72,11 @@ class JumpStarView: UIView {
             animationGroup.duration = duration
         }
         animationGroup.fillMode = kCAFillModeForwards
-        animationGroup.removedOnCompletion = false
+        animationGroup.isRemovedOnCompletion = false
         animationGroup.delegate = self
         animationGroup.animations = [transformAnimation, positionAnimation]
         
-        starView.layer.addAnimation(animationGroup, forKey: "jumpUp")
+        starView.layer.add(animationGroup, forKey: "jumpUp")
     }
     
 }
@@ -84,18 +84,18 @@ class JumpStarView: UIView {
 // MARK : CAAnimationDelegate
 
 extension JumpStarView {
-    override func animationDidStart(anim: CAAnimation) {
+    func animationDidStart(_ anim: CAAnimation) {
         guard let _ = option else {
             return
         }
         
-        if anim == starView.layer.animationForKey("jumpUp") {
-            UIView.animateWithDuration(option!.jumpDuration, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+        if anim == starView.layer.animation(forKey: "jumpUp") {
+            UIView.animate(withDuration: option!.jumpDuration, delay: 0.0, options: .curveEaseOut, animations: { () -> Void in
                 self.shadowView.alpha = 0.2
                 self.shadowView.bounds = CGRect(x: 0, y: 0, width: self.shadowView.bounds.width*1.6, height: self.shadowView.bounds.height)
                 }, completion: nil)
-        } else if anim == starView.layer.animationForKey("jumpDown") {
-            UIView.animateWithDuration(option!.jumpDuration, delay: 0.0, options: .CurveEaseOut, animations: { () -> Void in
+        } else if anim == starView.layer.animation(forKey: "jumpDown") {
+            UIView.animate(withDuration: option!.jumpDuration, delay: 0.0, options: .curveEaseOut, animations: { () -> Void in
                 self.shadowView.alpha = 0.4
                 self.shadowView.bounds = CGRect(x: 0, y: 0, width: self.shadowView.bounds.width/1.6, height: self.shadowView.bounds.height)
                 }, completion: nil)
@@ -104,9 +104,9 @@ extension JumpStarView {
         
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if anim == starView.layer.animationForKey("jumpUp") {
-            state = state == .Marked ? .NotMarked : .Marked
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if anim == starView.layer.animation(forKey: "jumpUp") {
+            state = state == .marked ? .notMarked : .marked
             
             let transformAnimation = CABasicAnimation(keyPath: "transform.rotation.y")
             transformAnimation.fromValue = M_PI_2
@@ -123,12 +123,12 @@ extension JumpStarView {
                 animationGroup.duration = duration
             }
             animationGroup.fillMode = kCAFillModeForwards
-            animationGroup.removedOnCompletion = false
+            animationGroup.isRemovedOnCompletion = false
             animationGroup.delegate = self
             animationGroup.animations = [transformAnimation, positionAnimation]
             
-            starView.layer.addAnimation(animationGroup, forKey: "jumpDown")
-        } else if anim == starView.layer.animationForKey("jumpDown") {
+            starView.layer.add(animationGroup, forKey: "jumpDown")
+        } else if anim == starView.layer.animation(forKey: "jumpDown") {
             starView.layer.removeAllAnimations()
             animating = false
         }
