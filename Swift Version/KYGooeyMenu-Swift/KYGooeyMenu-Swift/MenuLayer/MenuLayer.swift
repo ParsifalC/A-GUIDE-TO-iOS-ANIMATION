@@ -9,23 +9,23 @@
 import UIKit
 
 enum STATE {
-    case STATE1
-    case STATE2
-    case STATE3
+    case state1
+    case state2
+    case state3
 }
 
 let OFF: CGFloat = 30.0
 
 class MenuLayer: CALayer {
     var showDebug: Bool = false
-    var animationState: STATE = .STATE1
+    var animationState: STATE = .state1
     var xAxisPercent: CGFloat = 0.0
     
     override init() {
         super.init()
     }
     
-    override init(layer: AnyObject) {
+    override init(layer: Any) {
         super.init(layer: layer)
         if let lastLayer = layer as? MenuLayer {
             showDebug = lastLayer.showDebug
@@ -34,18 +34,18 @@ class MenuLayer: CALayer {
         }
     }
 
-    override class func needsDisplayForKey(key: String) -> Bool {
+    override class func needsDisplay(forKey key: String) -> Bool {
         if key == "xAxisPercent" {
             return true
         }
-        return super.needsDisplayForKey(key)
+        return super.needsDisplay(forKey: key)
     }
     
-    override func drawInContext(ctx: CGContext) {
+    override func draw(in ctx: CGContext) {
         print("acting")
-        let real_rect = CGRectInset(self.frame, OFF,OFF)
+        let real_rect = self.frame.insetBy(dx: OFF,dy: OFF)
         let offset = real_rect.size.width / 3.6
-        let center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        let center = CGPoint(x: self.frame.midX, y: self.frame.midY)
         
         var moveDistance_1: CGFloat
         var moveDistance_2: CGFloat
@@ -54,12 +54,12 @@ class MenuLayer: CALayer {
         var top_right: CGPoint
         
         switch animationState {
-        case .STATE1:
+        case .state1:
             moveDistance_1 = xAxisPercent*(real_rect.size.width/2 - offset)/2
-            top_left   =  CGPointMake(center.x-offset-moveDistance_1*2, OFF)
-            top_center =  CGPointMake(center.x-moveDistance_1, OFF)
-            top_right  =  CGPointMake(center.x+offset, OFF)
-        case .STATE2:
+            top_left   =  CGPoint(x: center.x-offset-moveDistance_1*2, y: OFF)
+            top_center =  CGPoint(x: center.x-moveDistance_1, y: OFF)
+            top_right  =  CGPoint(x: center.x+offset, y: OFF)
+        case .state2:
             var hightFactor: CGFloat
             if (xAxisPercent >= 0.2) {
                 hightFactor = 1-xAxisPercent;
@@ -68,47 +68,47 @@ class MenuLayer: CALayer {
             }
             moveDistance_1 = (real_rect.size.width/2 - offset)/2
             moveDistance_2 = xAxisPercent*(real_rect.size.width/3)
-            top_left   =  CGPointMake(center.x-offset-moveDistance_1*2 + moveDistance_2, OFF)
-            top_center =  CGPointMake(center.x-moveDistance_1 + moveDistance_2, OFF)
-            top_right  =  CGPointMake(center.x+offset+moveDistance_2, OFF)
-        case .STATE3:
+            top_left   =  CGPoint(x: center.x-offset-moveDistance_1*2 + moveDistance_2, y: OFF)
+            top_center =  CGPoint(x: center.x-moveDistance_1 + moveDistance_2, y: OFF)
+            top_right  =  CGPoint(x: center.x+offset+moveDistance_2, y: OFF)
+        case .state3:
             moveDistance_1 = (real_rect.size.width/2 - offset)/2
             moveDistance_2 = (real_rect.size.width/3)
             let gooeyDis_1 = xAxisPercent*(center.x-offset-moveDistance_1*2 + moveDistance_2-(center.x-offset))
             let gooeyDis_2 = xAxisPercent*(center.x-moveDistance_1 + moveDistance_2-(center.x))
             let gooeyDis_3 = xAxisPercent*(center.x+offset+moveDistance_2-(center.x+offset))
             
-            top_left   =  CGPointMake(center.x-offset-moveDistance_1*2 + moveDistance_2 - gooeyDis_1, OFF)
-            top_center =  CGPointMake(center.x-moveDistance_1 + moveDistance_2 - gooeyDis_2, OFF)
-            top_right  =  CGPointMake(center.x+offset+moveDistance_2 - gooeyDis_3, OFF)
+            top_left   =  CGPoint(x: center.x-offset-moveDistance_1*2 + moveDistance_2 - gooeyDis_1, y: OFF)
+            top_center =  CGPoint(x: center.x-moveDistance_1 + moveDistance_2 - gooeyDis_2, y: OFF)
+            top_right  =  CGPoint(x: center.x+offset+moveDistance_2 - gooeyDis_3, y: OFF)
         }
         
-        let right_top    =  CGPointMake(CGRectGetMaxX(real_rect), center.y-offset)
-        let right_center =  CGPointMake(CGRectGetMaxX(real_rect), center.y)
-        let right_bottom =  CGPointMake(CGRectGetMaxX(real_rect), center.y+offset)
+        let right_top    =  CGPoint(x: real_rect.maxX, y: center.y-offset)
+        let right_center =  CGPoint(x: real_rect.maxX, y: center.y)
+        let right_bottom =  CGPoint(x: real_rect.maxX, y: center.y+offset)
         
-        let bottom_left   =  CGPointMake(center.x-offset, CGRectGetMaxY(real_rect))
-        let bottom_center =  CGPointMake(center.x, CGRectGetMaxY(real_rect))
-        let bottom_right  =  CGPointMake(center.x+offset, CGRectGetMaxY(real_rect))
+        let bottom_left   =  CGPoint(x: center.x-offset, y: real_rect.maxY)
+        let bottom_center =  CGPoint(x: center.x, y: real_rect.maxY)
+        let bottom_right  =  CGPoint(x: center.x+offset, y: real_rect.maxY)
         
-        let left_top    =  CGPointMake(OFF, center.y-offset)
-        let left_center =  CGPointMake(OFF, center.y)
-        let left_bottom =  CGPointMake(OFF, center.y+offset)
+        let left_top    =  CGPoint(x: OFF, y: center.y-offset)
+        let left_center =  CGPoint(x: OFF, y: center.y)
+        let left_bottom =  CGPoint(x: OFF, y: center.y+offset)
         
         let circlePath = UIBezierPath()
-        circlePath.moveToPoint(top_center)
-        circlePath.addCurveToPoint(right_center, controlPoint1: top_right, controlPoint2: right_top)
-        circlePath.addCurveToPoint(bottom_center, controlPoint1: right_bottom, controlPoint2: bottom_right)
-        circlePath.addCurveToPoint(left_center, controlPoint1: bottom_left, controlPoint2: left_bottom)
-        circlePath.addCurveToPoint(top_center, controlPoint1: left_top, controlPoint2: top_left)
-        circlePath.closePath()
+        circlePath.move(to: top_center)
+        circlePath.addCurve(to: right_center, controlPoint1: top_right, controlPoint2: right_top)
+        circlePath.addCurve(to: bottom_center, controlPoint1: right_bottom, controlPoint2: bottom_right)
+        circlePath.addCurve(to: left_center, controlPoint1: bottom_left, controlPoint2: left_bottom)
+        circlePath.addCurve(to: top_center, controlPoint1: left_top, controlPoint2: top_left)
+        circlePath.close()
         
-        CGContextAddPath(ctx, circlePath.CGPath)
-        CGContextSetFillColorWithColor(ctx, UIColor(red: 29.0/255.0, green: 163.0/255.0, blue: 1.0, alpha: 1.0).CGColor)
-        CGContextFillPath(ctx)
+        ctx.addPath(circlePath.cgPath)
+        ctx.setFillColor(UIColor(red: 29.0/255.0, green: 163.0/255.0, blue: 1.0, alpha: 1.0).cgColor)
+        ctx.fillPath()
 
         if showDebug {
-            CGContextSetFillColorWithColor(ctx, UIColor.blueColor().CGColor)
+            ctx.setFillColor(UIColor.blue.cgColor)
             
             showPoint(top_left, context: ctx)
             showPoint(top_center, context: ctx)
@@ -133,9 +133,9 @@ class MenuLayer: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func showPoint(point: CGPoint, context: CGContextRef) {
-        let rect = CGRectMake(point.x-1, point.y-1, 2, 2)
-        CGContextFillRect(context, rect)
+    fileprivate func showPoint(_ point: CGPoint, context: CGContext) {
+        let rect = CGRect(x: point.x-1, y: point.y-1, width: 2, height: 2)
+        context.fill(rect)
     }
     
 }

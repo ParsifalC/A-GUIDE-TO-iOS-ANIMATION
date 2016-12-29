@@ -15,17 +15,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        menu = Menu(frame: CGRectMake(view.center.x-50, view.frame.size.height - 200, 100, 100))
+        menu = Menu(frame: CGRect(x: view.center.x-50, y: view.frame.size.height - 200, width: 100, height: 100))
         view.addSubview(menu!)
-        debugSwitcher.addTarget(self, action: "showDedug:", forControlEvents: .ValueChanged)
+        debugSwitcher.addTarget(self, action: #selector(ViewController.showDedug(_:)), for: .valueChanged)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
-    @objc private func showDedug(sender: UISwitch) {
-        if sender.on {
+    @objc fileprivate func showDedug(_ sender: UISwitch) {
+        if sender.isOn {
             menu?.menuLayer.showDebug = true
         } else {
             menu?.menuLayer.showDebug = false

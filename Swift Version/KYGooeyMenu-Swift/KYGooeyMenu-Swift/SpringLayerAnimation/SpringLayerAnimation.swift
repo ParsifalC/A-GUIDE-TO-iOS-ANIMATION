@@ -11,26 +11,26 @@ import UIKit
 class SpringLayerAnimation: NSObject {
     
     static let sharedAnimation = SpringLayerAnimation()
-    private override init() {}
+    fileprivate override init() {}
     
-    func createBasicAnimation(keypath: String, duration: Double, fromValue: AnyObject, toValue: AnyObject) -> CAKeyframeAnimation {
+    func createBasicAnimation(_ keypath: String, duration: Double, fromValue: AnyObject, toValue: AnyObject) -> CAKeyframeAnimation {
         let animation = CAKeyframeAnimation(keyPath: keypath)
         animation.values = basicAnimationValues(duration, fromValue: fromValue, toValue: toValue)
         animation.duration = duration
         animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
+        animation.isRemovedOnCompletion = false
         
         return animation
     }
     
-    func createSpringAnima(keypath: String, duration: Double, usingSpringWithDamping: Double, initialSpringVelocity: Double, fromValue: AnyObject, toValue: AnyObject) -> CAKeyframeAnimation {
+    func createSpringAnima(_ keypath: String, duration: Double, usingSpringWithDamping: Double, initialSpringVelocity: Double, fromValue: AnyObject, toValue: AnyObject) -> CAKeyframeAnimation {
         let dampingFactor  = 10.0
         let velocityFactor = 10.0
         let animation = CAKeyframeAnimation(keyPath: keypath)
         animation.values = springAnimationValues(duration, fromValue: fromValue, toValue: toValue, damping: usingSpringWithDamping * dampingFactor, velocity: initialSpringVelocity * velocityFactor)
         animation.duration = duration
         animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
+        animation.isRemovedOnCompletion = false
         
         return animation
     }
@@ -38,9 +38,9 @@ class SpringLayerAnimation: NSObject {
 }
 
 extension SpringLayerAnimation {
-    private func basicAnimationValues(duration: Double, fromValue: AnyObject, toValue: AnyObject) -> [Double] {
+    fileprivate func basicAnimationValues(_ duration: Double, fromValue: AnyObject, toValue: AnyObject) -> [Double] {
         let numberOfFrames = Int(duration * 60)
-        var values = [Double](count: numberOfFrames, repeatedValue: 0.0)
+        var values = [Double](repeating: 0.0, count: numberOfFrames)
         let diff = toValue.doubleValue - fromValue.doubleValue
         for frame in 0..<numberOfFrames {
             let x = Double(frame / numberOfFrames)
@@ -50,9 +50,9 @@ extension SpringLayerAnimation {
         return values
     }
     
-    private func springAnimationValues(duration: Double, fromValue: AnyObject, toValue: AnyObject, damping: Double, velocity: Double) -> [Double] {
+    fileprivate func springAnimationValues(_ duration: Double, fromValue: AnyObject, toValue: AnyObject, damping: Double, velocity: Double) -> [Double] {
         let numberOfFrames = Int(duration * 60)
-        var values = [Double](count: numberOfFrames, repeatedValue: 0.0)
+        var values = [Double](repeating: 0.0, count: numberOfFrames)
         let diff = toValue.doubleValue - fromValue.doubleValue
         for frame in 0..<numberOfFrames {
             let x = Double(frame / numberOfFrames)

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F73DDE41C3F848200CE78A4 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F73DDE31C3F848200CE78A4 /* Menu.swift */; settings = {ASSET_TAGS = (); }; };
+		5F73DDE41C3F848200CE78A4 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F73DDE31C3F848200CE78A4 /* Menu.swift */; };
 		5FFE11A21C3E5C67001AE2AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11A11C3E5C67001AE2AC /* AppDelegate.swift */; };
 		5FFE11A41C3E5C67001AE2AC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11A31C3E5C67001AE2AC /* ViewController.swift */; };
 		5FFE11A71C3E5C67001AE2AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE11A51C3E5C67001AE2AC /* Main.storyboard */; };
@@ -15,8 +15,8 @@
 		5FFE11AC1C3E5C67001AE2AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE11AA1C3E5C67001AE2AC /* LaunchScreen.storyboard */; };
 		5FFE11B71C3E5C67001AE2AC /* KYGooeyMenu_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11B61C3E5C67001AE2AC /* KYGooeyMenu_SwiftTests.swift */; };
 		5FFE11C21C3E5C67001AE2AC /* KYGooeyMenu_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11C11C3E5C67001AE2AC /* KYGooeyMenu_SwiftUITests.swift */; };
-		5FFE11D31C3E736E001AE2AC /* MenuLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11D21C3E736E001AE2AC /* MenuLayer.swift */; settings = {ASSET_TAGS = (); }; };
-		5FFE11D61C3E73AA001AE2AC /* SpringLayerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11D51C3E73AA001AE2AC /* SpringLayerAnimation.swift */; settings = {ASSET_TAGS = (); }; };
+		5FFE11D31C3E736E001AE2AC /* MenuLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11D21C3E736E001AE2AC /* MenuLayer.swift */; };
+		5FFE11D61C3E73AA001AE2AC /* SpringLayerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE11D51C3E73AA001AE2AC /* SpringLayerAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,18 +220,21 @@
 		5FFE11961C3E5C67001AE2AC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kitten Yang";
 				TargetAttributes = {
 					5FFE119D1C3E5C67001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 					5FFE11B11C3E5C67001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE119D1C3E5C67001AE2AC;
 					};
 					5FFE11BC1C3E5C67001AE2AC = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 						TestTargetID = 5FFE119D1C3E5C67001AE2AC;
 					};
 				};
@@ -360,8 +363,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -405,8 +410,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -425,6 +432,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -438,6 +446,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -449,6 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -460,6 +470,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KYGooeyMenu-Swift.app/KYGooeyMenu-Swift";
 			};
 			name = Debug;
@@ -472,6 +483,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-SwiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KYGooeyMenu-Swift.app/KYGooeyMenu-Swift";
 			};
 			name = Release;
@@ -483,6 +495,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "KYGooeyMenu-Swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -495,6 +508,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.KYGooeyMenu-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "KYGooeyMenu-Swift";
 				USES_XCTRUNNER = YES;
 			};
