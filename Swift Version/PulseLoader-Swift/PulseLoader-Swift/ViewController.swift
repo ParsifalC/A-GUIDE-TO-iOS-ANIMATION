@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let pulseLoader = PulseLoader(frame: CGRect(origin: view.center, size: CGSize(width: 100, height: 100)), color: UIColor.redColor())
+        let pulseLoader = PulseLoader(frame: CGRect(origin: view.center, size: CGSize(width: 100, height: 100)), color: UIColor.red)
         pulseLoader.center = view.center
         view.addSubview(pulseLoader)
         

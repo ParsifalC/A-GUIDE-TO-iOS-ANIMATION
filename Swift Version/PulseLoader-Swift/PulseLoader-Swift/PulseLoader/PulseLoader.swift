@@ -10,7 +10,7 @@ import UIKit
 
 class PulseLoader: UIView {
     
-    private let pulseLayer = CAShapeLayer()
+    fileprivate let pulseLayer = CAShapeLayer()
     var color: UIColor
     
     init(frame: CGRect, color: UIColor) {
@@ -23,10 +23,10 @@ class PulseLoader: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUp() {
+    fileprivate func setUp() {
         pulseLayer.frame = bounds
-        pulseLayer.path  = UIBezierPath(ovalInRect: pulseLayer.bounds).CGPath
-        pulseLayer.fillColor = color.CGColor
+        pulseLayer.path  = UIBezierPath(ovalIn: pulseLayer.bounds).cgPath
+        pulseLayer.fillColor = color.cgColor
         
         let replicatorLayer = CAReplicatorLayer()
         replicatorLayer.frame = bounds
@@ -43,24 +43,24 @@ class PulseLoader: UIView {
         groupAnimation.duration = 4.0
         groupAnimation.autoreverses = false
         groupAnimation.repeatCount = HUGE
-        pulseLayer.addAnimation(groupAnimation, forKey: "groupAnimation")
+        pulseLayer.add(groupAnimation, forKey: "groupAnimation")
     }
     
-    private func alphaAnimation() -> CABasicAnimation{
+    fileprivate func alphaAnimation() -> CABasicAnimation{
         let alphaAnim = CABasicAnimation(keyPath: "opacity")
-        alphaAnim.fromValue = NSNumber(float: 1.0)
-        alphaAnim.toValue = NSNumber(float: 0.0)
+        alphaAnim.fromValue = NSNumber(value: 1.0 as Float)
+        alphaAnim.toValue = NSNumber(value: 0.0 as Float)
         return alphaAnim
     }
     
-    private func scaleAnimation() -> CABasicAnimation{
+    fileprivate func scaleAnimation() -> CABasicAnimation{
         let scaleAnim = CABasicAnimation(keyPath: "transform")
         
         let t = CATransform3DIdentity
         let t2 = CATransform3DScale(t, 0.0, 0.0, 0.0)
-        scaleAnim.fromValue = NSValue.init(CATransform3D: t2)
+        scaleAnim.fromValue = NSValue.init(caTransform3D: t2)
         let t3 = CATransform3DScale(t, 1.0, 1.0, 0.0)
-        scaleAnim.toValue = NSValue.init(CATransform3D: t3)
+        scaleAnim.toValue = NSValue.init(caTransform3D: t3)
         return scaleAnim
     }
     
