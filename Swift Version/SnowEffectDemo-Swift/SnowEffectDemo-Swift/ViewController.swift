@@ -14,8 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let snowEmitter = CAEmitterLayer()
 
-        snowEmitter.emitterPosition = CGPointMake(self.view.bounds.size.width / 2.0, -30)
-        snowEmitter.emitterSize  = CGSizeMake(self.view.bounds.size.width * 2.0, 0.0)
+        snowEmitter.emitterPosition = CGPoint(x: self.view.bounds.size.width / 2.0, y: -30)
+        snowEmitter.emitterSize  = CGSize(width: self.view.bounds.size.width * 2.0, height: 0.0)
         snowEmitter.emitterShape = kCAEmitterLayerLine
         snowEmitter.emitterMode  = kCAEmitterLayerOutline
         
@@ -27,15 +27,15 @@ class ViewController: UIViewController {
         snowflake.yAcceleration = 2
         snowflake.emissionRange = CGFloat(0.5 * M_PI)
         snowflake.spinRange = CGFloat(0.25 * M_PI)
-        snowflake.contents = UIImage(named: "snow")?.CGImage
-        snowflake.color = UIColor(red: 0.600, green: 0.658, blue: 0.743, alpha: 1.000).CGColor
+        snowflake.contents = UIImage(named: "snow")?.cgImage
+        snowflake.color = UIColor(red: 0.600, green: 0.658, blue: 0.743, alpha: 1.000).cgColor
         
         snowEmitter.shadowOpacity = 1.0
         snowEmitter.shadowRadius  = 0.0
-        snowEmitter.shadowOffset  = CGSizeMake(0.0, 1.0)
-        snowEmitter.shadowColor   = UIColor.whiteColor().CGColor
+        snowEmitter.shadowOffset  = CGSize(width: 0.0, height: 1.0)
+        snowEmitter.shadowColor   = UIColor.white.cgColor
         snowEmitter.emitterCells = Array(arrayLiteral: snowflake)
-        view.layer.insertSublayer(snowEmitter, atIndex: 0)
+        view.layer.insertSublayer(snowEmitter, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
